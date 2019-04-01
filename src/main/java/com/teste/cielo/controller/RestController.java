@@ -38,6 +38,7 @@ public class RestController {
 		    if(extrato == null || extrato.getListaControleLancamento().isEmpty()) {
 		    	return new ResponseEntity<ErroResponse>(new ErroResponse("400", "Nenhum dado encontrado."),
 						HttpStatus.NOT_FOUND);
+		    	
 		    }
 					
 		} catch (Exception e) {
