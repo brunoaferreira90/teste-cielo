@@ -25,6 +25,7 @@ public class RestController {
 
 	@ApiOperation(value = "Buscar Extrato Cliente", response = Extrato.class, notes = "Operação responsável por buscar o extrato do cliente.")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Operação responsável por buscar o extrato do cliente."),
+			@ApiResponse(code = 204, message = "Caso não seja retornado nenhum dado a ser exibido na tela"),
 			@ApiResponse(code = 500, message = "Caso tenhamos algum erro vamos retornar um ErroResponse") })
 
 	@CrossOrigin(origins = "http://localhost:4200")
@@ -33,6 +34,12 @@ public class RestController {
 		Extrato extrato;
 		try {
 			extrato = extratoService.getExtrato();
+					
+		    if(extrato == null || extrato.getListaControleLancamento().isEmpty()) {
+		    	return new ResponseEntity<ErroResponse>(new ErroResponse("204", "Nenhum dado encontrado."),
+						HttpStatus.NO_CONTENT);
+		    }
+					
 		} catch (Exception e) {
 			return new ResponseEntity<ErroResponse>(new ErroResponse("500", "Erro ao buscar Extrato."),
 					HttpStatus.INTERNAL_SERVER_ERROR);
