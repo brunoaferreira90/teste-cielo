@@ -17,7 +17,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @org.springframework.web.bind.annotation.RestController
-@RequestMapping("/api")
+@RequestMapping("/api/extrato")
 public class RestController {
 
 	@Autowired
@@ -29,7 +29,7 @@ public class RestController {
 			@ApiResponse(code = 500, message = "Caso tenhamos algum erro vamos retornar um ErroResponse") })
 
 	@CrossOrigin(origins = "http://localhost:4200")
-	@GetMapping(value = "/extrato/", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/getExtrato/", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> get() {
 		Extrato extrato;
 		try {
