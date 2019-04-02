@@ -29,7 +29,7 @@ public class RestController {
 			@ApiResponse(code = 500, message = "Caso tenhamos algum erro vamos retornar um ErroResponse") })
 
 	@CrossOrigin(origins = "http://localhost:4200")
-	@GetMapping(value = "/get/", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/extrato/", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> get() {
 		Extrato extrato;
 		try {
