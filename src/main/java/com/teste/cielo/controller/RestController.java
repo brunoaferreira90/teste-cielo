@@ -17,7 +17,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @org.springframework.web.bind.annotation.RestController
-@RequestMapping("/api/extrato")
+@RequestMapping("/api")
 public class RestController {
 
 	@Autowired
@@ -25,19 +25,19 @@ public class RestController {
 
 	@ApiOperation(value = "Buscar Extrato Cliente", response = Extrato.class, notes = "Operação responsável por buscar o extrato do cliente.")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Operação responsável por buscar o extrato do cliente."),
-			@ApiResponse(code = 400, message = "Caso não seja retornado nenhum dado a ser exibido na tela"),
+			@ApiResponse(code = 204, message = "Caso não seja retornado nenhum dado a ser exibido na tela"),
 			@ApiResponse(code = 500, message = "Caso tenhamos algum erro vamos retornar um ErroResponse") })
 
-	@CrossOrigin(origins = "http://localhost:4200")
-	@GetMapping(value = "/getExtrato/", produces = MediaType.APPLICATION_JSON_VALUE)
+	@CrossOrigin
+	@GetMapping(value = "/extrato/", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> get() {
 		Extrato extrato;
 		try {
 			extrato = extratoService.getExtrato();
 			
 		    if(extrato == null || extrato.getListaControleLancamento().isEmpty()) {
-		    	return new ResponseEntity<ErroResponse>(new ErroResponse("400", "Nenhum dado encontrado."),
-						HttpStatus.NOT_FOUND);
+		    	return new ResponseEntity<ErroResponse>(new ErroResponse("204", "Nenhum dado encontrado."),
+						HttpStatus.NO_CONTENT);
 		    	
 		    }
 					
